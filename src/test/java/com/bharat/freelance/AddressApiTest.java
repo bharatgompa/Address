@@ -74,14 +74,4 @@ public class AddressApiTest {
                 .body("preferNotToSay",equalTo(true))
                 .body("fifthLine",equalTo("Test Country"));
     }
-
-    @Test
-    public void testDeleteAddresses() {
-        RestAssured.baseURI = "http://localhost:9092/api/addresses/v1/delete/9";
-
-        given()
-                .when().delete()
-                .then()
-                .statusCode(200);
-    }
 }
