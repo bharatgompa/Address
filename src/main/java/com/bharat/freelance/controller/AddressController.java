@@ -2,9 +2,12 @@ package com.bharat.freelance.controller;
 
 import com.bharat.freelance.entity.Address;
 import com.bharat.freelance.service.AddressService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +24,10 @@ public class AddressController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addAddress(@RequestBody Address address) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.addAddress(address));
+    public ResponseEntity<String> addAddress(@Validated @NonNull @RequestBody Address address) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(addressService.addAddress(address));
     }
 
     @PutMapping("/update/{id}")
